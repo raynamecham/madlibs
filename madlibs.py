@@ -19,7 +19,13 @@ AWESOMENESS = [
 def start_here():
     """Display homepage."""
 
-    return "Hi! This is the home page."
+    return """
+    <!doctype html>
+    <html>
+      <body>
+        <a href="/hello">Madlibs Game</a>
+      </body>
+    </html>"""
 
 
 @app.route('/hello')
@@ -43,16 +49,18 @@ def greet_person():
 
 @app.route('/game')
 def show_madlib_form():
+    """Show form to play madlibs or say goodbye"""
 
-    play_game = request.args.get("play")
+    play_game = request.args.get("game")
 
-    if play_game == 'yes':
+    if play_game == "yes":
         return render_template("game.html")
     else:
         return render_template("goodbye.html")
 
 @app.route('/madlib')
-def show_madlib_form():
+def show_madlib():
+    """ Show resulting madlib """
 
     name = request.args.get("name")
     color = request.args.get("color")
